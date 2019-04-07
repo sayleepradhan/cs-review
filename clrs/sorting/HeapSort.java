@@ -1,4 +1,4 @@
-package sorting;
+package clrs.sorting;
 
 public class HeapSort {
     private int[] heap;

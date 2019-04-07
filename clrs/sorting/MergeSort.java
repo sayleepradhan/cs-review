@@ -1,7 +1,7 @@
-package sorting;
+package clrs.sorting;
 
 public class MergeSort {
-//    arr, 0,3,6
+
     private void merge(int[] arr, int start, int mid, int end) {
         int len1 = mid - start + 1;
         int len2 = end - mid;

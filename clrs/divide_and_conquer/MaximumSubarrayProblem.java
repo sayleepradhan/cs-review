@@ -1,4 +1,4 @@
-package divide_and_conquer;
+package clrs.divide_and_conquer;
 
 public class MaximumSubarrayProblem {
     class TradeInfo {
