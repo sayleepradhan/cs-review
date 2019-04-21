@@ -13,15 +13,15 @@ public class RodCuttingProblem {
         }
         return q;
     }
-    private int memoizedTopDownSolution(int[] prices, int rodLength) {
+    private int memoizedTopDownCutRod(int[] prices, int rodLength) {
 
         int[] auxArray = new int[rodLength];
         Arrays.fill(auxArray, Integer.MIN_VALUE);
 
-        return memoizedTopDownAux(prices, rodLength-1, auxArray);
+        return memoizedTopDownCutRodAux(prices, rodLength-1, auxArray);
     }
 
-    private int memoizedTopDownAux(int[] prices, int n, int[] aux) {
+    private int memoizedTopDownCutRodAux(int[] prices, int n, int[] aux) {
         if (n == -1) {
             return 0;
         }
@@ -32,10 +32,23 @@ public class RodCuttingProblem {
         int q = Integer.MIN_VALUE;
         for (int i = 0; i <= n; i++) {
             q = Math.max(q, prices[i] +
-                    memoizedTopDownAux(prices, n - i - 1, aux));
+                    memoizedTopDownCutRodAux(prices, n - i - 1, aux));
         }
         aux[n] = q;
         return q;
+    }
+
+    private int bottomUpCutRod(int[] p, int n) {
+        int[] r = new int[n+1];
+        r[0] = 0;
+        for (int j = 1; j <= n; j++) {
+            int q = Integer.MIN_VALUE;
+            for (int i = 1; i<=j; i++ ) {
+                q = Math.max(q, p[i-1] + r[j-i]);
+            }
+            r[j] = q;
+        }
+        return r[n];
     }
 
 
@@ -49,9 +62,14 @@ public class RodCuttingProblem {
                 + instance.recursiveNaiveCutRod(prices, 6));
 
         System.out.println("Optimal price (using Top Down DP algorithm) for length 9: "
-                + instance.memoizedTopDownSolution(prices, 9));
+                + instance.memoizedTopDownCutRod(prices, 9));
         System.out.println("Optimal price (using Top Down DP algorithm) for length 7: "
-                + instance.memoizedTopDownSolution(prices, 7));
+                + instance.memoizedTopDownCutRod(prices, 7));
+
+        System.out.println("Optimal price (using Bottom up DP algorithm) for length 9: "
+                + instance.bottomUpCutRod(prices, 9));
+        System.out.println("Optimal price (using Bottom up DP algorithm) for length 7: "
+                + instance.bottomUpCutRod(prices, 7));
 
     }
 }
