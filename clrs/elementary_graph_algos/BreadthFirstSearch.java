@@ -37,10 +37,12 @@ public class BreadthFirstSearch<E> {
                 return true;
             }
             for (Vertex<E> v : u.edges) {
-                v.color = Color.Gray;
-                v.parent = u;
-                v.distance = u.distance + 1;
-                queue.add(v);
+               if (v.color == Color.White) {
+                   v.color = Color.Gray;
+                   v.parent = u;
+                   v.distance = u.distance + 1;
+                   queue.add(v);
+               }
             }
             u.color = Color.Black;
         }
