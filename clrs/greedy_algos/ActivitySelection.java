@@ -27,6 +27,23 @@ public class ActivitySelection {
         return schedule;
     }
 
+    private Set<Activity> greedyActivitySelector(List<Activity> activities) {
+        Set<Activity> schedule = new HashSet<>();
+        schedule.add(activities.get(0));
+        int numberOfActivities = activities.size();
+        int currentActivityIndex = 1;
+        int lastActivityFinishTime = activities.get(0).finishTime;
+        while (currentActivityIndex < numberOfActivities) {
+            Activity currentActivity = activities.get(currentActivityIndex);
+            if (lastActivityFinishTime + 1 <= currentActivity.startTime) {
+                schedule.add(currentActivity);
+                lastActivityFinishTime = currentActivity.finishTime;
+            }
+            currentActivityIndex++;
+        }
+        return schedule;
+    }
+
     private void sortActvities(List<Activity> activities) {
         activities.sort((o1, o2) -> {
             if (o1.finishTime == o2.finishTime)
@@ -60,13 +77,9 @@ public class ActivitySelection {
 
         System.out.println();
         System.out.println("List of the activities selected in the schedule: ");
-        Set<Activity> schedule = solution.recursiveActivitySelector(null, activities,0,-1);
-
-        activities.clear();
-        activities.addAll(schedule);
-        solution.sortActvities(activities);
-
-        for (Activity a: activities) {
+//        Set<Activity> schedule = solution.recursiveActivitySelector(null, activities,0,-1);
+        Set<Activity> schedule = solution.greedyActivitySelector(activities);
+        for (Activity a: schedule) {
             System.out.println ("Activity "+activities.indexOf(a)+":- start: "+a.startTime+" finish: "+a.finishTime);
         }
     }
