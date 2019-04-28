@@ -7,7 +7,7 @@ import java.util.*;
 
 public class KruskalImpl {
 
-    private Set<Edge> findMST(Graph graph) {
+    private Set<Edge> findMST(Graph<Edge,Vertex> graph) {
         Set<Edge> minimumSpanningTree = new HashSet<>();
 
         DisjointSet<Vertex> disjointSet = new DisjointSet<>(graph.vertices);
@@ -62,7 +62,7 @@ public class KruskalImpl {
                 new Edge(g,h,1),
                 new Edge(h,i,7)
         ));
-        Graph graph = new Graph(edges, vertices);
+        Graph<Edge, Vertex> graph = new Graph<>(edges, vertices);
 
         Set<Edge> mstEdges = solution.findMST(graph);
 
@@ -72,11 +72,11 @@ public class KruskalImpl {
     }
 }
 
-class Graph {
-    List<Edge> edges;
-    List<Vertex> vertices;
+class Graph<E,V> {
+    List<E> edges;
+    List<V> vertices;
 
-    Graph(ArrayList<Edge> edges, ArrayList<Vertex> vertices) {
+    Graph(ArrayList<E> edges, ArrayList<V> vertices) {
         this.edges = edges;
         this.vertices = vertices;
     }
@@ -95,6 +95,7 @@ class Edge {
 
 class Vertex {
     char data;
+    Vertex(){}
     Vertex(char data) {
         this.data = data;
     }
