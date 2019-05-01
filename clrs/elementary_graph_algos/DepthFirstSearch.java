@@ -9,7 +9,7 @@ public class DepthFirstSearch<E> {
 
     private int time = 0;
 
-    private void search(DFSGraph<E> graph) {
+    public void search(DFSGraph<E> graph) {
 
         for (DFSVertex<E> u : graph.vertices ) {
             u.color = Color.White;
