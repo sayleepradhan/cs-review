@@ -10,15 +10,16 @@ public class BellmanFordAlgorithm {
         }
     }
 
-    private void initialize(List<Vertex> vertices) {
+    private void initialize(List<Vertex> vertices, Vertex source) {
         for (Vertex v: vertices) {
             v.d = Integer.MAX_VALUE;
             v.parent = null;
         }
+        source.d = 0;
     }
 
-    private boolean runBellmanFord(Graph<Edge, Vertex> graph) {
-        initialize(graph.vertices);
+    private boolean runBellmanFord(Graph<Edge, Vertex> graph, Vertex source) {
+        initialize(graph.vertices, source);
         for (Vertex vertex: graph.vertices) {
             for (Edge edge: graph.edges) {
                 relax(edge);
@@ -56,7 +57,7 @@ public class BellmanFordAlgorithm {
                 Arrays.asList(
                         s,t,x,y,z
                 ));
-        boolean pathExists = solution.runBellmanFord(graph);
+        boolean pathExists = solution.runBellmanFord(graph,s);
         System.out.println("Bellman ford path exists: "+pathExists);
     }
 }

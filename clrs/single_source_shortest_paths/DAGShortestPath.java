@@ -11,11 +11,12 @@ public class DAGShortestPath<E> {
         }
     }
 
-    private void initialize(List<DFSVertex<E>> vertices) {
+    private void initialize(List<DFSVertex<E>> vertices, DFSVertex<E> source) {
         for (DFSVertex v: vertices) {
             v.d = Integer.MAX_VALUE;
             v.parent = null;
         }
+        source.d = 0;
     }
 
     public void search(DFSGraph<E> graph) {
@@ -59,9 +60,9 @@ public class DAGShortestPath<E> {
 
         return vertices;
     }
-    private void dagShortestPath(DFSGraph<E> graph){
+    private void dagShortestPath(DFSGraph<E> graph, DFSVertex<E> source){
         List<DFSVertex<E>> topologicalOrder = topologicalSort(graph);
-        initialize(topologicalOrder);
+        initialize(topologicalOrder, source);
         for (DFSVertex<E> u: topologicalOrder) {
             for (Map.Entry<DFSVertex<E>, Integer> entry: u.edges.entrySet()) {
                 DFSVertex<E> v = entry.getKey();
