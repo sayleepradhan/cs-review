@@ -5,7 +5,7 @@ import java.util.*;
 public class TopologicalSort<E> {
 
 
-    private List<DFSVertex<E>> toppologicalSort(DFSGraph<E> graph) {
+    private List<DFSVertex<E>> topologicalSort(DFSGraph<E> graph) {
         DepthFirstSearch<E> dfs = new DepthFirstSearch<>();
         dfs.search(graph);
         List<DFSVertex<E>> vertices = new LinkedList<>(graph.vertices);
@@ -41,7 +41,7 @@ public class TopologicalSort<E> {
         ));
 
         TopologicalSort<String> solution = new TopologicalSort<>();
-        List<DFSVertex<String>> list = solution.toppologicalSort(graph);
+        List<DFSVertex<String>> list = solution.topologicalSort(graph);
 
         for (DFSVertex<String> vertex: list) {
             System.out.print(vertex.data);
